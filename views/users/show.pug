@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h1= title
+
+  p Voici l'utilisateur :
+
+  table(border=1)
+    tr
+      th Id
+      td= user.rowid
+    tr
+      th Pseudo
+      td= user.pseudo
+    tr
+      th Password
+      td= user.password
+    tr
+      th Prénom
+      td= user.firstname
+    tr
+      th Email
+      td= user.email

@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+  h1= title
+
+  p Editer les todos :
+
+  form(action=action method='post')
+    table(border=1)
+      tr
+        th Id
+        td= user._id
+      tr
+        th UserId
+        td= pseudo
+          
+      tr
+        th Message
+        td
+          input(
+		    name='message' 
+			value=user.message
+		  )
+      tr
+        th Assigne
+        td
+          input(
+		    name='assigne' 
+			
+		  )
+      tr
+        th Completed
+        td
+          input(
+            type='checkbox'
+            name='completed' 
+          )
+
+    input(type='submit', value='Envoyer')

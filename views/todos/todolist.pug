@@ -1,0 +1,56 @@
+extends ../layout
+
+block content
+  h1= title
+
+  p Voici la liste des todos :
+
+  table(border=1)
+    tr
+      th User
+      th Message
+      th Assigne_A
+      th CreatedAt
+      th CompletedAt
+      th Team
+
+    each todo in todos
+      tr
+        td= todo.userId
+        td= todo.message
+        td= todo.assigne
+        td= todo.createdAt
+        td= todo.completedAt
+        td= todo.team
+        td
+          ul
+            li
+              a(href="/todos/" + todo._id + '/edit') Éditer ou Assigner
+            li
+              a(href="/todos/" + todo._id + '?_method=delete') Supprimer
+            li
+              a(href="/todos/" + todo._id + '/move') Retarder
+			  
+        
+  td
+    ul 
+      li
+        a(class='button' href="/sessions/" + '?_method=delete') Logout
+        = '\n'
+      li
+        a(class='button' href="/todos?team=" + button.team) Voir Team
+        = '\n'
+      li
+        a(class='button' href="/todos?assigne=" + button.pseudo) Voir Assigne
+        = '\n'
+      li
+        a(class='button' href="/users/") Voir la liste des utilisateurs
+        = '\n'
+      
+  
+  ul.pagination
+    - var nbPage = Math.ceil(count / limit)
+    - for (var i = 0; i < nbPage; i++) {
+      li
+        a(href='/todos?limit=' + limit + '&offset=' + (i*limit)) Page #{i + 1}
+    - }

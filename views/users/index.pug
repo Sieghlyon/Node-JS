@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+  h1= title
+
+  p Voici la liste des utilisateurs :
+
+  table(border=1)
+    tr
+      th Pseudo
+      th Password
+      th Prénom
+      th Email
+      th Equipe
+      th Actions
+
+    each user in users
+      tr
+        td= user.pseudo
+        td= user.password
+        td= user.firstname
+        td= user.email
+        td= user.team
+        td
+          ul
+            li
+              a(href="/users/" + user._id) Voir
+            li
+              a(href="/users/" + user._id + '/edit') Éditer
+            li
+              a(href="/users/" + user._id + '?_method=delete') Supprimer
+  ul
+    li
+      a(class='button' href="/sessions/" + '?_method=delete') Logout
+      = '\n'
+  ul
+    li
+      a(class='button' href="/todos/" ) Voir la todoliste
+
+  ul.pagination
+    - var nbPage = Math.ceil(count / limit)
+    - for (var i = 0; i < nbPage; i++) {
+      li
+        a(href='/users?limit=' + limit + '&offset=' + (i*limit)) Page #{i + 1}
+    - }
