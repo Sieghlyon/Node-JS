@@ -6,19 +6,26 @@ services:
       - back-tier
     volumes:
       - db-data:/data/db
+  redis:
+    image: redis
+    networks:
+      - back-tier
+    volumes:
+      - db-data:/data/re-db
   backend:
     build: .
-    command: nodemon . --exitcrash
     volumes:
       - .:/app
       - dependencies:/app/node_modules
     ports:
-      - "3003:3000"
+      - "3000:8080"
     links:
       - db-mongo
     environment:
-      - PORT=3000
+      - PORT=8080
       - NODE_ENV=development
+      - MONGO_HOST=db-mongo
+      - REDIS_HOST=redis
     networks:
       - front-tier
       - back-tier

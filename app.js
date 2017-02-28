@@ -11,7 +11,7 @@ const methodOverride = require('method-override')
 
 
 // Constantes et initialisations
-const PORT = process.PORT || 8080
+const PORT = process.env.PORT || 8080
 const app = express()
 
 // Mise en place des vues
